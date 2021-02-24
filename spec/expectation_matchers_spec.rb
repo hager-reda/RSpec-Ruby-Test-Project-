@@ -56,5 +56,41 @@ describe 'Expectation Matchers' do
             expect(0).not_to be_nil
         end
     end
+    describe 'numeric comparison matchers' do
+        it 'will match less/greater than ' do
+            expect(10).to be > 9
+            expect(10).to be >= 10
+            expect(10).to be <= 10
+            expect(9).to be < 10
+        end
+
+        it 'will match numeric ranges' do
+            expect(10).to be_between(5, 10).inclusive
+            expect(10).not_to be_between(5, 10).exclusive
+            expect(10).to be_within(1).of(11)
+            expect(5..10).to cover(9)
+        end
+    end
+
+    describe 'collection matchers' do
+        it 'will match arrays' do
+            array = [1,2,3]
+            expect(array).to include(3)
+            expect(array).to include(1,3)
+            expect(array).to start_with(1)
+            expect(array).to end_with(3)
+            expect(array).to match_array([3,2,1])
+            expect(array).not_to match_array([2,1])
+            expect(array).to contain_exactly(3,2,1) 
+        end
+
+        it 'will match hashes' do
+            hash = {:a => 1, :b => 2, :c => 3}
+            expect(hash).to include(:a)
+            expect(hash).to include(:a => 1)
+            expect(hash).to include(:a => 1, :c => 3)
+            expect(hash).to include({:a => 1, :c => 3})
+        end
+    end
     
 end
