@@ -92,5 +92,24 @@ describe 'Expectation Matchers' do
             expect(hash).to include({:a => 1, :c => 3})
         end
     end
+    describe 'observation matchers' do
+        #NOte that all of these use "expect{}" block , not "expect()" param
+        #It is a special block format that allow a process to take 
+        #place inside the expectation
+        it 'will match when events change object attibutes' do
+            # calls the test begore the block
+            #then again after the block
+            array = []
+            expect {array << 1 }.to change(array, :empty?).from(true).to(false)
+            class WebsiteHits
+                attr_accessor :count
+                def initialize; @count = 0; end
+                def increment; @count += 1; end
+            end
+            hits = WebsiteHits.new
+            expect{ hits.increment }.to change(hits, :count).from(0).to(1)
+        end
+        
+    end
     
 end

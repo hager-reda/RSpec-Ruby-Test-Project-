@@ -3,29 +3,34 @@ require 'car'
  describe 'Car' do #example group
 # describe accept 1 parameter stribg or class name
     describe 'attributes' do
+
+        #hooks before example will run before each example
+        before(:example) do
+            @car = Car.new
+        end
         # xdescribe 'attributes' do => xdescribe skipped the all example group
         #or by using skip word and pending word 
         #but bu using pending it will run the test already and check if it faiols
-        xit "allows reading and writing for :make" do
+        it "allows reading and writing for :make" do
         # it accept string just to describe what it does
         #xit skipped the example
-            car =  Car.new
-            car.make = 'Test'
-            expect(car.make).to eq('Test')
+            # car =  Car.new
+            @car.make = 'Test'
+            expect(@car.make).to eq('Test')
         end
         it "allows reading and writing for :year" do
-                car =  Car.new
-                car.year = 9999
-                expect(car.year).to eq(9999)
+                # car =  Car.new
+                @car.year = 9999
+                expect(@car.year).to eq(9999)
         end
         it "allows reading and writing for :color" do
-                car =  Car.new
-                car.color = 'fooo'
-                expect(car.color).to eq('fooo')
+                # car =  Car.new
+                @car.color = 'fooo'
+                expect(@car.color).to eq('fooo')
         end
         it "allows reading  for :wheels" do
-            car =  Car.new
-            expect(car.wheels).to eq(4)
+            # car =  Car.new
+            expect(@car.wheels).to eq(4)
         end
 
         it "allows writing for :doors"   #this is a pending example
